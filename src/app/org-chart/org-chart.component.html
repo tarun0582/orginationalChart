@@ -1,0 +1,46 @@
+<input type="text" placeholder="Search" (input)="onSearch($event)">
+<ul  *ngFor="let result of searchResults">
+  <li><button (click)="searchEmployee(result)" >{{ result.name }}</button></li>
+</ul>
+
+<div class="sample chart-container"  id="scroll" >
+    <fam-diagram  
+        [items]="items"
+        [autoSizeMinimum]="autoSizeMinimum"
+        [autoSizeMaximum]="autoSizeMaximum"
+        [cursorItem]="cursorItem"
+        [defaultTemplateName] = "defaultTemplateName"
+        [normalLevelShift] = "normalLevelShift"
+        [normalItemsInterval] = "normalItemsInterval"
+        [pageFitMode]=5
+        [linesColor]="'orange'"
+        [hasSelectorCheckbox]=2
+        [templates]="[
+        {
+            name: 'md',
+            itemSize: { width: 180, height: 90 },
+            minimizedItemSize: { width: 13, height: 3 },
+            highlightPadding: { left: 4, top: 4, right: 4, bottom: -18 },
+            itemTemplate: md,
+            cursorPadding: { left: 0, top: 0, right: 0, bottom: 0 }
+        },
+    ]"
+>
+</fam-diagram>
+<ng-template #md let-itemConfig="context" let-isCursor="isCursor"  >
+    <mat-card class="example-card"  (click)="openDialog(itemConfig)">
+        <mat-card-title-group>  
+            <mat-card-title>{{itemConfig?.name}}</mat-card-title>
+            <img mat-card-sm-image [src]="itemConfig.image" [alt]="itemConfig.designation
+            " >
+            <mat-card-subtitle>{{itemConfig?.teams}}</mat-card-subtitle>
+        </mat-card-title-group>
+        <mat-card-content> 
+        </mat-card-content>
+        <ng-container *ngIf="isCursor">
+            <mat-card-footer>
+                <mat-progress-bar mode="determinate" value="100"></mat-progress-bar>
+            </mat-card-footer>
+        </ng-container>
+    </mat-card>
+</ng-template>

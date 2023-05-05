@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>{{data.name}}</h1>
+
+<div mat-dialog-content>
+  <div>
+    <img style="height: 200px; width: 200px;" src={{data.image}}>
+</div>
+  <p>{{data.designation}}</p>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">ok</button>
+</div>
